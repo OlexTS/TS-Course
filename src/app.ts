@@ -113,66 +113,169 @@
 
 /*
   |==============================
-  | Lesson 4
+  | Lesson 4 Practice
   |==============================
 */
 
-class Key {
-  private signature: number;
+// class House {
+//   street: string;
 
-  constructor() {
-    this.signature = Math.random();
-  }
+//   constructor(n: string) {
+//     this.street = n;
+//   }
 
-  getSignature(): number {
-    return this.signature;
-  }
-}
+//   showAddress(this: House, add: string): void {
+//     console.log("Address " + this.street + add);
 
-class Person {
-  constructor(public name: string, private key: Key) {}
-  getKey(): Key {
-    return this.key;
-  }
-}
+//   }
+// }
 
-abstract class House {
-  protected door = false;
-  protected tenants: Person[] = [];
+// const house = new House('Soborna');
+// const copyHouse = { showAddress: house.showAddress, street: 'New address ' };
+// copyHouse.showAddress('string')
 
-  constructor(protected key: Key) {}
+// class House {
+  
+  
+//   private tenants: string[]=[]
 
-  comeIn(tenant: Person) {
-    if (!this.door) {
-      throw new Error("The door is block");
-    }
-    console.log(`${tenant.name} is at home`);
+//   constructor(private street: string, public readonly type: string) {
     
-    this.tenants.push(tenant);
+//   }
+
+//   public showAddress(this: House): void {
+//     console.log("Address " + this.street);
+//   }
+
+//   public showType(this: House): void {
+//     console.log("Type " + this.type);
+//   }
+
+//   public addTenant(tenant: string): void {
+//     this.tenants.push(tenant)
+//   }
+
+//   public showTenants(): void {
+//     console.log(this.tenants);
+    
+//   }
+// }
+
+// const house = new House("Soborna", "Wooden");
+// house.addTenant('Jack')
+// house.addTenant('Luke')
+// house.showTenants()
+// house.showType()
+// console.log(house.type);
+class House {
+  private tenants: string[] = []
+  
+  constructor(protected street: string, public readonly type: string) {
+  }
+
+  public showAddress(this: House): void {
+    console.log("Address " + this.street);
+  }
+
+  public showType(this: House): void {
+    console.log("Type " + this.type);
+  }
+
+  public addTenant(tenant: string): void {
+    this.tenants.push(tenant)
+  }
+
+  public showTenants(): void {
+    console.log(this.tenants);
+    
+  }
+}
+
+class StoneHouse extends House {
+  private chargeOfTheHouse: string;
+  constructor(street: string, general: string) {
+    super('stone', street)
+    this.chargeOfTheHouse = general;
+  }
+
+  public showAddress(): void {
+    console.log("Address " + this.street);
   }
   
-
-  abstract openDoor(key: Key): boolean;
+  public showTenants(): void {
+    console.log("General: " + this.chargeOfTheHouse)
+    
+    super.showTenants()
+  }
 }
 
-class MyHouse extends House {
-  openDoor(key: Key) {
-    if (key.getSignature() !== this.key.getSignature()) {
-      throw new Error ('This key is wrong')
-    }
-    console.log('The door is open');
-    
-    return this.door = true;
-  }
- }
+const stoneHouse = new StoneHouse('Bezrucko', "Denis");
+stoneHouse.addTenant('Sam');
+stoneHouse.addTenant('Don')
+stoneHouse.showTenants();
 
-const key = new Key();
 
-const person = new Person('Luke', key);
-const person2 = new Person('Jack', key)
-const myHouse = new MyHouse(key);
 
-myHouse.openDoor(person.getKey());
-myHouse.openDoor(person2.getKey());
-myHouse.comeIn(person)
-myHouse.comeIn(person2)
+/*
+  |==============================
+  | Lesson 4 Homework
+  |==============================
+*/
+// class Key {
+//   private signature: number;
+
+//   constructor() {
+//     this.signature = Math.random();
+//   }
+
+//   getSignature(): number {
+//     return this.signature;
+//   }
+// }
+
+// class Person {
+//   constructor(public name: string, private key: Key) {}
+//   getKey(): Key {
+//     return this.key;
+//   }
+// }
+
+// abstract class House {
+//   protected door = false;
+//   protected tenants: Person[] = [];
+
+//   constructor(protected key: Key) {}
+
+//   comeIn(tenant: Person) {
+//     if (!this.door) {
+//       throw new Error("The door is block");
+//     }
+//     console.log(`${tenant.name} is at home`);
+
+//     this.tenants.push(tenant);
+//   }
+
+//   abstract openDoor(key: Key): boolean;
+// }
+
+// class MyHouse extends House {
+//   openDoor(key: Key) {
+//     if (key.getSignature() !== this.key.getSignature()) {
+//       throw new Error("This key is wrong");
+//     }
+//     console.log("The door is open");
+
+//     return (this.door = true);
+//   }
+// }
+
+// const key = new Key();
+
+// const person = new Person("Luke", key);
+// const person2 = new Person("Jack", key);
+// const myHouse = new MyHouse(key);
+
+// myHouse.openDoor(person.getKey());
+// myHouse.openDoor(person2.getKey());
+// myHouse.comeIn(person);
+// myHouse.comeIn(person2);
