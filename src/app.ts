@@ -167,54 +167,172 @@
 // house.showTenants()
 // house.showType()
 // console.log(house.type);
-class House {
-  private tenants: string[] = []
+
+
+// class House {
+//   private tenants: string[] = []
   
-  constructor(protected street: string, public readonly type: string) {
-  }
+//   constructor(protected street: string, public readonly type: string) {
+//   }
 
-  public showAddress(this: House): void {
-    console.log("Address " + this.street);
-  }
+//   public showAddress(this: House): void {
+//     console.log("Address " + this.street);
+//   }
 
-  public showType(this: House): void {
-    console.log("Type " + this.type);
-  }
+//   public showType(this: House): void {
+//     console.log("Type " + this.type);
+//   }
 
-  public addTenant(tenant: string): void {
-    this.tenants.push(tenant)
-  }
+//   public addTenant(tenant: string): void {
+//     this.tenants.push(tenant)
+//   }
 
-  public showTenants(): void {
-    console.log(this.tenants);
+//   public showTenants(): void {
+//     console.log(this.tenants);
+    
+//   }
+// }
+
+// class StoneHouse extends House {
+//   private chargeOfTheHouse: string;
+//   constructor(street: string, general: string) {
+//     super('stone', street)
+//     this.chargeOfTheHouse = general;
+//   }
+
+//   public showAddress(): void {
+//     console.log("Address " + this.street);
+//   }
+  
+//   public showTenants(): void {
+//     console.log("General: " + this.chargeOfTheHouse)
+    
+//     super.showTenants()
+//   }
+// }
+
+// const stoneHouse = new StoneHouse('Bezrucko', "Denis");
+// stoneHouse.addTenant('Sam');
+// stoneHouse.addTenant('Don')
+// stoneHouse.showTenants();
+
+
+// abstract class Plane {
+//   protected pilotInCabine = false;
+
+//   public sitInPlane() {
+//     this.pilotInCabine = true;
+//   }
+
+//   public abstract startEngine(): string;
+
+// }
+
+// class Maize extends Plane {
+//   public startEngine() {
+//     return 'ta-ta-ta-ta'
+//   }
+// }
+
+// class Boing extends Plane {
+//   public startEngine() {
+//     return 'Wuuuuuuuuuu'
+//   }
+// }
+
+// const maize = new Maize()
+// const boing = new Boing()
+
+// maize.sitInPlane();
+// boing.sitInPlane();
+
+// console.log(maize.startEngine())
+// console.log(boing.startEngine())
+
+
+interface IPerson {
+ readonly name: string;
+  age: number;
+
+  greet(phrase: string): void;
+}
+
+interface IPilot {
+  flyMessage(): void;
+}
+
+class Pilot implements IPerson, IPilot {
+  constructor(public readonly name: string, public age: number) {
+    this.checkAge()
+   }
+  private checkAge() {
+    if (this.age < 28) {
+      throw new Error ('Pilot is too young')
+    }
+  }
+  
+  public greet(phrase: string): void {
+      console.log(phrase + ' ' + this.name);
+  }
+  
+  public flyMessage(): void {
+    console.log('The plain is flying. Have a nice flight!');
     
   }
 }
 
-class StoneHouse extends House {
-  private chargeOfTheHouse: string;
-  constructor(street: string, general: string) {
-    super('stone', street)
-    this.chargeOfTheHouse = general;
+abstract class Plane {
+  protected pilot?: IPilot;
+
+  public sitInPlane(pilot: IPilot) {
+    this.pilot = pilot;
   }
 
-  public showAddress(): void {
-    console.log("Address " + this.street);
-  }
-  
-  public showTenants(): void {
-    console.log("General: " + this.chargeOfTheHouse)
+  public abstract startEngine(): boolean;
+
+}
+
+class Boing extends Plane {
+  public startEngine() {
+    if (!this.pilot) {
+      throw new Error('Here is no pilot in the cabin')
+    }
+    console.log('Turbines start working');
+    this.pilot.flyMessage()
     
-    super.showTenants()
+    return true
   }
 }
 
-const stoneHouse = new StoneHouse('Bezrucko', "Denis");
-stoneHouse.addTenant('Sam');
-stoneHouse.addTenant('Don')
-stoneHouse.showTenants();
+class Terrorist implements IPilot {
+  public bluff(phrase: string): void {
+    console.log(phrase);
+    
+  }
+  public flyMessage(): void {
+    console.log('Your plane is under our control. We demand 100 million dollars or we will kill all hostages');
+}
+}
+
+const boing = new Boing()
+const pilot = new Pilot('Sam', 28);
+pilot.greet('Hello. I am a captain');
+boing.sitInPlane(pilot);
+boing.startEngine()
+
+// const pilot = new Terrorist();
+// boing.sitInPlane(pilot);
+// pilot.bluff('Attention')
+// boing.startEngine();
 
 
+// type addFunction = (n1: number, n2: number) => number;
+
+// interface addFunction{ (n1: number, n2: number): number}
+
+// const foo: addFunction = (n1: number, n2: number)=>{
+//   return n1+n2
+// }
 
 /*
   |==============================

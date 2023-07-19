@@ -1,38 +1,48 @@
 "use strict";
-class House {
-    constructor(street, type) {
-        this.street = street;
-        this.type = type;
-        this.tenants = [];
+class Pilot {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+        this.checkAge();
     }
-    showAddress() {
-        console.log("Address " + this.street);
+    checkAge() {
+        if (this.age < 28) {
+            throw new Error('Pilot is too young');
+        }
     }
-    showType() {
-        console.log("Type " + this.type);
+    greet(phrase) {
+        console.log(phrase + ' ' + this.name);
     }
-    addTenant(tenant) {
-        this.tenants.push(tenant);
-    }
-    showTenants() {
-        console.log(this.tenants);
-    }
-}
-class StoneHouse extends House {
-    constructor(street, general) {
-        super('stone', street);
-        this.chargeOfTheHouse = general;
-    }
-    showAddress() {
-        console.log("Address " + this.street);
-    }
-    showTenants() {
-        console.log("General: " + this.chargeOfTheHouse);
-        super.showTenants();
+    flyMessage() {
+        console.log('The plain is flying. Have a nice flight!');
     }
 }
-const stoneHouse = new StoneHouse('Bezrucko', "Denis");
-stoneHouse.addTenant('Sam');
-stoneHouse.addTenant('Don');
-stoneHouse.showTenants();
+class Plane {
+    sitInPlane(pilot) {
+        this.pilot = pilot;
+    }
+}
+class Boing extends Plane {
+    startEngine() {
+        if (!this.pilot) {
+            throw new Error('Here is no pilot in the cabin');
+        }
+        console.log('Turbines start working');
+        this.pilot.flyMessage();
+        return true;
+    }
+}
+class Terrorist {
+    bluff(phrase) {
+        console.log(phrase);
+    }
+    flyMessage() {
+        console.log('Your plane is under our control. We demand 100 million dollars or we will kill all hostages');
+    }
+}
+const boing = new Boing();
+const pilot = new Pilot('Sam', 28);
+pilot.greet('Hello. I am a captain');
+boing.sitInPlane(pilot);
+boing.startEngine();
 //# sourceMappingURL=app.js.map
