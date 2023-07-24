@@ -393,6 +393,156 @@
 // myHouse.comeIn(person);
 // myHouse.comeIn(person2);
 
+
+/*
+  |==============================
+  | Lesson 5 Practice
+  |==============================
+*/
+
+// type Admin = {
+//   name: string,
+//   privileges: string[]
+// }
+
+// type User = {
+//   name: string;
+//   startDate: Date;
+// }
+
+// type AdminUser = Admin & User
+
+// const user: AdminUser = {
+//   name: 'jack', privileges: ['first', 'second'], startDate: new Date
+// }
+// console.log(user);
+
+
+// interface Admin  {
+//   name: string,
+//   privileges: string[]
+// }
+
+// interface User {
+//   name: string;
+//   startDate: Date;
+// }
+
+// interface AdminUser extends Admin, User{ }
+
+
+// type ComplexType = string | number
+// function combine(a: ComplexType, b: ComplexType) {
+//   if (typeof a === 'string' || typeof b === 'string') {
+//     return a.toString() + b.toString()
+//   }
+//   return a+b
+// }
+
+
+interface Admin  {
+  name: string,
+  privileges: string[]
+}
+
+interface User {
+  name: string;
+  startDate: Date; 
+}
+
+type AdminOrUser = Admin | User;
+function showFields(el: AdminOrUser) {
+  if ('startDate' in el) {
+    console.log(el.startDate);
+  }
+  if ('privileges' in el) {
+    console.log(el.privileges);
+  }
+  console.log(el.name);
+  
+}
+
+
+abstract class Guy {
+  constructor(public name: string){}
+}
+
+class Good extends Guy {
+  advice() {
+    console.log('advice');
+}
+}
+class Bad extends Guy {
+  insult() {
+    console.log('insult');
+}
+}
+
+const good = new Good('Yarik');
+const bad = new Bad('Boban');
+
+function guy(user: Guy) {
+  if (user instanceof Good) {
+    user.advice()
+  }
+  if (user instanceof Bad) {
+    user.insult()
+  }
+}
+
+
+const input = document.getElementById('num1')
+if (input){
+  (input as HTMLInputElement).value
+  const newValue = input as HTMLInputElement;
+  newValue.value
+}
+
+
+
+// interface IPerson {
+//   name: string;
+//   age: number,
+//   [x: string]: string | number;
+// }
+
+// const user: IPerson = {
+//   name: 'Jack',
+//   age: 35,
+//   gender: 'Man',
+//   country: 'United States',
+  
+// }
+
+
+interface IPerson {
+  name: string;
+  additionInfo?: {
+    someInfo: string
+  }
+}
+
+const user: IPerson = {
+  name: 'Luke'
+}
+
+user?.additionInfo?.someInfo
+
+
+
+const userInput = null;
+const store = userInput ?? 'DEFAULT'
+console.log(store);
+
+
+function add(a: string, b: string): string;
+function add(a: number, b: number): number;
+function add(a: string | number, b: string | number){
+  if (typeof a === 'string' || typeof b === 'string') {
+   return a.toString()+b.toString()
+  }
+  return a + b;
+}
 /*
   |==============================
   | Lesson 5 Homework
