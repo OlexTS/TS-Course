@@ -135,12 +135,11 @@
 // copyHouse.showAddress('string')
 
 // class House {
-  
-  
+
 //   private tenants: string[]=[]
 
 //   constructor(private street: string, public readonly type: string) {
-    
+
 //   }
 
 //   public showAddress(this: House): void {
@@ -157,7 +156,7 @@
 
 //   public showTenants(): void {
 //     console.log(this.tenants);
-    
+
 //   }
 // }
 
@@ -168,10 +167,9 @@
 // house.showType()
 // console.log(house.type);
 
-
 // class House {
 //   private tenants: string[] = []
-  
+
 //   constructor(protected street: string, public readonly type: string) {
 //   }
 
@@ -189,7 +187,7 @@
 
 //   public showTenants(): void {
 //     console.log(this.tenants);
-    
+
 //   }
 // }
 
@@ -203,10 +201,10 @@
 //   public showAddress(): void {
 //     console.log("Address " + this.street);
 //   }
-  
+
 //   public showTenants(): void {
 //     console.log("General: " + this.chargeOfTheHouse)
-    
+
 //     super.showTenants()
 //   }
 // }
@@ -215,7 +213,6 @@
 // stoneHouse.addTenant('Sam');
 // stoneHouse.addTenant('Don')
 // stoneHouse.showTenants();
-
 
 // abstract class Plane {
 //   protected pilotInCabine = false;
@@ -249,82 +246,80 @@
 // console.log(maize.startEngine())
 // console.log(boing.startEngine())
 
+// interface IPerson {
+//  readonly name: string;
+//   age: number;
 
-interface IPerson {
- readonly name: string;
-  age: number;
+//   greet(phrase: string): void;
+// }
 
-  greet(phrase: string): void;
-}
+// interface IPilot {
+//   flyMessage(): void;
+// }
 
-interface IPilot {
-  flyMessage(): void;
-}
+// class Pilot implements IPerson, IPilot {
+//   constructor(public readonly name: string, public age: number) {
+//     this.checkAge()
+//    }
+//   private checkAge() {
+//     if (this.age < 28) {
+//       throw new Error ('Pilot is too young')
+//     }
+//   }
 
-class Pilot implements IPerson, IPilot {
-  constructor(public readonly name: string, public age: number) {
-    this.checkAge()
-   }
-  private checkAge() {
-    if (this.age < 28) {
-      throw new Error ('Pilot is too young')
-    }
-  }
-  
-  public greet(phrase: string): void {
-      console.log(phrase + ' ' + this.name);
-  }
-  
-  public flyMessage(): void {
-    console.log('The plain is flying. Have a nice flight!');
-    
-  }
-}
+//   public greet(phrase: string): void {
+//       console.log(phrase + ' ' + this.name);
+//   }
 
-abstract class Plane {
-  protected pilot?: IPilot;
+//   public flyMessage(): void {
+//     console.log('The plain is flying. Have a nice flight!');
 
-  public sitInPlane(pilot: IPilot) {
-    this.pilot = pilot;
-  }
+//   }
+// }
 
-  public abstract startEngine(): boolean;
+// abstract class Plane {
+//   protected pilot?: IPilot;
 
-}
+//   public sitInPlane(pilot: IPilot) {
+//     this.pilot = pilot;
+//   }
 
-class Boing extends Plane {
-  public startEngine() {
-    if (!this.pilot) {
-      throw new Error('Here is no pilot in the cabin')
-    }
-    console.log('Turbines start working');
-    this.pilot.flyMessage()
-    
-    return true
-  }
-}
+//   public abstract startEngine(): boolean;
 
-class Terrorist implements IPilot {
-  public bluff(phrase: string): void {
-    console.log(phrase);
-    
-  }
-  public flyMessage(): void {
-    console.log('Your plane is under our control. We demand 100 million dollars or we will kill all hostages');
-}
-}
+// }
 
-const boing = new Boing()
-const pilot = new Pilot('Sam', 28);
-pilot.greet('Hello. I am a captain');
-boing.sitInPlane(pilot);
-boing.startEngine()
+// class Boing extends Plane {
+//   public startEngine() {
+//     if (!this.pilot) {
+//       throw new Error('Here is no pilot in the cabin')
+//     }
+//     console.log('Turbines start working');
+//     this.pilot.flyMessage()
+
+//     return true
+//   }
+// }
+
+// class Terrorist implements IPilot {
+//   public bluff(phrase: string): void {
+//     console.log(phrase);
+
+//   }
+//   public flyMessage(): void {
+//     console.log('Your plane is under our control. We demand 100 million dollars or we will kill all hostages');
+// }
+// }
+
+// const boing = new Boing()
+// const pilot = new Pilot('Sam', 28);
+// pilot.greet('Hello. I am a captain');
+// boing.sitInPlane(pilot);
+// boing.startEngine()
 
 // const pilot = new Terrorist();
 // boing.sitInPlane(pilot);
 // pilot.bluff('Attention')
 // boing.startEngine();
-
 
 // type addFunction = (n1: number, n2: number) => number;
 
@@ -397,3 +392,67 @@ boing.startEngine()
 // myHouse.openDoor(person2.getKey());
 // myHouse.comeIn(person);
 // myHouse.comeIn(person2);
+
+/*
+  |==============================
+  | Lesson 5 Homework
+  |==============================
+*/
+
+function getPromise(): Promise<Array<string | number>> {
+  return new Promise((resolve) => {
+    resolve(["Text", 50]);
+  });
+}
+
+getPromise().then((data) => {
+  console.log(data);
+});
+
+type AllType = {
+  name: string;
+  position: number;
+  color: string;
+  weight: number;
+};
+
+function compare(
+  top: Pick<AllType, "name" | "color">,
+  bottom: Pick<AllType, "position" | "weight">
+): AllType {
+  return {
+    name: top.name,
+    color: top.color,
+    position: bottom.position,
+    weight: bottom.weight,
+  };
+}
+
+
+function merge<T extends object, U extends object >(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+
+const merged = merge({ auto: 'Renault' }, { model: 'Megane' })
+console.log(merged);
+
+
+
+class Component<T> {
+  constructor (public props:T) {
+
+  }
+}
+
+interface IProps {
+  title: string,
+}
+
+class Page extends Component<IProps>{
+  pageInfo () {
+    console.log(this.props.title);
+  }
+}
+
+const newPage = new Page({ title: 'Cat' });
+newPage.pageInfo()

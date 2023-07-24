@@ -1,48 +1,35 @@
 "use strict";
-class Pilot {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
-        this.checkAge();
-    }
-    checkAge() {
-        if (this.age < 28) {
-            throw new Error('Pilot is too young');
-        }
-    }
-    greet(phrase) {
-        console.log(phrase + ' ' + this.name);
-    }
-    flyMessage() {
-        console.log('The plain is flying. Have a nice flight!');
+function getPromise() {
+    return new Promise((resolve) => {
+        resolve(["Text", 50]);
+    });
+}
+getPromise().then((data) => {
+    console.log(data);
+});
+function compare(top, bottom) {
+    return {
+        name: top.name,
+        color: top.color,
+        position: bottom.position,
+        weight: bottom.weight,
+    };
+}
+function merge(objA, objB) {
+    return Object.assign(objA, objB);
+}
+const merged = merge({ auto: 'Renault' }, { model: 'Megane' });
+console.log(merged);
+class Component {
+    constructor(props) {
+        this.props = props;
     }
 }
-class Plane {
-    sitInPlane(pilot) {
-        this.pilot = pilot;
+class Page extends Component {
+    pageInfo() {
+        console.log(this.props.title);
     }
 }
-class Boing extends Plane {
-    startEngine() {
-        if (!this.pilot) {
-            throw new Error('Here is no pilot in the cabin');
-        }
-        console.log('Turbines start working');
-        this.pilot.flyMessage();
-        return true;
-    }
-}
-class Terrorist {
-    bluff(phrase) {
-        console.log(phrase);
-    }
-    flyMessage() {
-        console.log('Your plane is under our control. We demand 100 million dollars or we will kill all hostages');
-    }
-}
-const boing = new Boing();
-const pilot = new Pilot('Sam', 28);
-pilot.greet('Hello. I am a captain');
-boing.sitInPlane(pilot);
-boing.startEngine();
+const newPage = new Page({ title: 'Cat' });
+newPage.pageInfo();
 //# sourceMappingURL=app.js.map
