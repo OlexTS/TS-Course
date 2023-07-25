@@ -543,6 +543,25 @@ function add(a: string | number, b: string | number){
   }
   return a + b;
 }
+
+
+let arr: (string | number)[];
+arr = ['arr', 1];
+const promise: Promise<string> = new Promise((resolve) => {
+   resolve('string')
+})
+promise.then(() => {
+
+})
+ 
+  (() => {
+    async function promiseFoo(): Promise<string>{
+    return 'String2'
+    }
+    promiseFoo().then((data) => {
+      
+    })
+})()
 /*
   |==============================
   | Lesson 5 Homework
