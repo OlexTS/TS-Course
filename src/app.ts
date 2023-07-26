@@ -548,20 +548,136 @@ function add(a: string | number, b: string | number){
 let arr: (string | number)[];
 arr = ['arr', 1];
 const promise: Promise<string> = new Promise((resolve) => {
-   resolve('string')
-})
-promise.then(() => {
-
-})
+  resolve('string')
+});
  
-  (() => {
-    async function promiseFoo(): Promise<string>{
+promise.then((data) => {
+  console.log(data);
+  });
+
+(() => {
+  async function promiseFoo(): Promise<string> {
     return 'String2'
-    }
-    promiseFoo().then((data) => {
+  }
+  promiseFoo().then((data) => {
+      console.log(data);
       
-    })
-})()
+  })
+})();
+
+// type Person = {
+//   name: string
+// }
+// type additionFields = {
+//   age: number
+// }
+// function mergee<T, U>(objA: T, objB: U){
+//   return Object.assign({}, objA, objB);
+// }
+// const toMerge1 = {
+//   name: 'Max'
+// }
+// const toMerge2 = {
+//   age: 22
+// }
+// const mergeed = merge<Person, additionFields>(toMerge1, toMerge2);
+// mergeed.name
+
+
+function mergee<T extends object, U extends object>(objA: T, objB: U){
+  return Object.assign({}, objA, objB);
+}
+const toMerge1 = {
+  name: 'Max'
+}
+const toMerge2 = {
+  age: 22
+}
+const mergeed = merge(toMerge1, toMerge2);
+mergeed.name
+
+
+interface ILength {
+  length: number
+}
+function getLength <T extends ILength>(str: T): number {
+  return str.length
+}
+const obj = {
+  length: 20
+}
+console.log(getLength(obj));
+
+
+function extractValue<T extends object, U extends keyof T>(obj: T, key: U) {
+  return obj[key]
+}
+const field = extractValue({ name: 'Bob' }, 'name')
+
+
+class DataStore<T>{
+  private data: T[] = []
+  addItem(item: T): void{
+    this.data.push(item)
+  }
+  getItem(): T[]{
+    return this.data
+  }
+}
+interface IPerson {
+  name: string
+}
+const storeUsers = new DataStore<IPerson>()
+storeUsers.addItem({name: 'turbo'})
+storeUsers.addItem({name: 'turbo2'})
+console.log(storeUsers.getItem());
+
+const ageStore = new DataStore<number>();
+ageStore.addItem(10)
+ageStore.addItem(11)
+console.log(ageStore.getItem());
+
+
+
+interface IUser {
+  name: string;
+  age: number;
+}
+function createPerson(name: string): IUser {
+  const person: Partial<IUser> = {name};
+  person.age = 21;
+  return person as IUser
+}
+
+
+
+// const arr1: Readonly<string[]> = ['one', 'two', 'three']
+// arr1.push('four')
+// console.log(arr1);
+
+// interface IUser1{
+//   name: string
+// }
+
+// const obj1: Readonly<IPerson> = {
+//   name: 'Osaka'
+// }
+// obj1.name = 'Osaka1'
+
+
+
+interface IPage {
+  title: string;
+  annotation: string;
+  pageNumber: number;
+}
+const pageAnnotation: Pick<IPage, 'annotation' | 'pageNumber'> = {
+  annotation: 'small page',
+  pageNumber: 22
+}
+console.log(pageAnnotation);
+
+
 /*
   |==============================
   | Lesson 5 Homework
