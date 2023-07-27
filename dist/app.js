@@ -5,28 +5,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function Logger(logString) {
-    return function (constructor) {
-        console.log(logString);
-        console.log(constructor);
-    };
-}
-function AddProperty() {
-    return function (constructor) {
-        console.log('AddProperty');
-        constructor.prototype.modify = true;
+function ControllerDecoration(config) {
+    return function (originalConstructor) {
+        return class extends originalConstructor {
+            constructor(...args) {
+                super(...args);
+                this.parent = document.getElementById(config.parent);
+                this.element = document.createElement(config.template);
+                this.element.innerHTML = this.content;
+                this.parent.appendChild(this.element);
+            }
+        };
     };
 }
 let Controller = class Controller {
     constructor() {
-        this.id = 1;
-        this.modify = false;
+        this.content = 'My controller';
     }
 };
 Controller = __decorate([
-    Logger('LOGGING-CONTROLLER'),
-    AddProperty()
+    ControllerDecoration({
+        parent: 'app',
+        template: 'H1'
+    })
 ], Controller);
-const controller = new Controller();
-console.log('Is modify?', controller.modify);
+const controller1 = new Controller();
+const controller2 = new Controller();
+const controller3 = new Controller();
 //# sourceMappingURL=app.js.map
