@@ -445,58 +445,58 @@ interface Admin  {
   privileges: string[]
 }
 
-interface User {
-  name: string;
-  startDate: Date; 
-}
+// interface User {
+//   name: string;
+//   startDate: Date; 
+// }
 
-type AdminOrUser = Admin | User;
-function showFields(el: AdminOrUser) {
-  if ('startDate' in el) {
-    console.log(el.startDate);
-  }
-  if ('privileges' in el) {
-    console.log(el.privileges);
-  }
-  console.log(el.name);
+// type AdminOrUser = Admin | User;
+// function showFields(el: AdminOrUser) {
+//   if ('startDate' in el) {
+//     console.log(el.startDate);
+//   }
+//   if ('privileges' in el) {
+//     console.log(el.privileges);
+//   }
+//   console.log(el.name);
   
-}
+// }
 
 
-abstract class Guy {
-  constructor(public name: string){}
-}
+// abstract class Guy {
+//   constructor(public name: string){}
+// }
 
-class Good extends Guy {
-  advice() {
-    console.log('advice');
-}
-}
-class Bad extends Guy {
-  insult() {
-    console.log('insult');
-}
-}
+// class Good extends Guy {
+//   advice() {
+//     console.log('advice');
+// }
+// }
+// class Bad extends Guy {
+//   insult() {
+//     console.log('insult');
+// }
+// }
 
-const good = new Good('Yarik');
-const bad = new Bad('Boban');
+// const good = new Good('Yarik');
+// const bad = new Bad('Boban');
 
-function guy(user: Guy) {
-  if (user instanceof Good) {
-    user.advice()
-  }
-  if (user instanceof Bad) {
-    user.insult()
-  }
-}
+// function guy(user: Guy) {
+//   if (user instanceof Good) {
+//     user.advice()
+//   }
+//   if (user instanceof Bad) {
+//     user.insult()
+//   }
+// }
 
 
-const input = document.getElementById('num1')
-if (input){
-  (input as HTMLInputElement).value
-  const newValue = input as HTMLInputElement;
-  newValue.value
-}
+// const input = document.getElementById('num1')
+// if (input){
+//   (input as HTMLInputElement).value
+//   const newValue = input as HTMLInputElement;
+//   newValue.value
+// }
 
 
 
@@ -515,55 +515,55 @@ if (input){
 // }
 
 
-interface IPerson {
-  name: string;
-  additionInfo?: {
-    someInfo: string
-  }
-}
+// interface IPerson {
+//   name: string;
+//   additionInfo?: {
+//     someInfo: string
+//   }
+// }
 
-const user: IPerson = {
-  name: 'Luke'
-}
+// const user: IPerson = {
+//   name: 'Luke'
+// }
 
-user?.additionInfo?.someInfo
-
-
-
-const userInput = null;
-const store = userInput ?? 'DEFAULT'
-console.log(store);
+// user?.additionInfo?.someInfo
 
 
-function add(a: string, b: string): string;
-function add(a: number, b: number): number;
-function add(a: string | number, b: string | number){
-  if (typeof a === 'string' || typeof b === 'string') {
-   return a.toString()+b.toString()
-  }
-  return a + b;
-}
+
+// const userInput = null;
+// const store = userInput ?? 'DEFAULT'
+// console.log(store);
 
 
-let arr: (string | number)[];
-arr = ['arr', 1];
-const promise: Promise<string> = new Promise((resolve) => {
-  resolve('string')
-});
+// function add(a: string, b: string): string;
+// function add(a: number, b: number): number;
+// function add(a: string | number, b: string | number){
+//   if (typeof a === 'string' || typeof b === 'string') {
+//    return a.toString()+b.toString()
+//   }
+//   return a + b;
+// }
+
+
+// let arr: (string | number)[];
+// arr = ['arr', 1];
+// const promise: Promise<string> = new Promise((resolve) => {
+//   resolve('string')
+// });
  
-promise.then((data) => {
-  console.log(data);
-  });
+// promise.then((data) => {
+//   console.log(data);
+//   });
 
-(() => {
-  async function promiseFoo(): Promise<string> {
-    return 'String2'
-  }
-  promiseFoo().then((data) => {
-      console.log(data);
+// (() => {
+//   async function promiseFoo(): Promise<string> {
+//     return 'String2'
+//   }
+//   promiseFoo().then((data) => {
+//       console.log(data);
       
-  })
-})();
+//   })
+// })();
 
 // type Person = {
 //   name: string
@@ -584,70 +584,70 @@ promise.then((data) => {
 // mergeed.name
 
 
-function mergee<T extends object, U extends object>(objA: T, objB: U){
-  return Object.assign({}, objA, objB);
-}
-const toMerge1 = {
-  name: 'Max'
-}
-const toMerge2 = {
-  age: 22
-}
-const mergeed = merge(toMerge1, toMerge2);
-mergeed.name
+// function mergee<T extends object, U extends object>(objA: T, objB: U){
+//   return Object.assign({}, objA, objB);
+// }
+// const toMerge1 = {
+//   name: 'Max'
+// }
+// const toMerge2 = {
+//   age: 22
+// }
+// const mergeed = merge(toMerge1, toMerge2);
+// mergeed.name
 
 
-interface ILength {
-  length: number
-}
-function getLength <T extends ILength>(str: T): number {
-  return str.length
-}
-const obj = {
-  length: 20
-}
-console.log(getLength(obj));
+// interface ILength {
+//   length: number
+// }
+// function getLength <T extends ILength>(str: T): number {
+//   return str.length
+// }
+// const obj = {
+//   length: 20
+// }
+// console.log(getLength(obj));
 
 
-function extractValue<T extends object, U extends keyof T>(obj: T, key: U) {
-  return obj[key]
-}
-const field = extractValue({ name: 'Bob' }, 'name')
+// function extractValue<T extends object, U extends keyof T>(obj: T, key: U) {
+//   return obj[key]
+// }
+// const field = extractValue({ name: 'Bob' }, 'name')
 
 
-class DataStore<T>{
-  private data: T[] = []
-  addItem(item: T): void{
-    this.data.push(item)
-  }
-  getItem(): T[]{
-    return this.data
-  }
-}
-interface IPerson {
-  name: string
-}
-const storeUsers = new DataStore<IPerson>()
-storeUsers.addItem({name: 'turbo'})
-storeUsers.addItem({name: 'turbo2'})
-console.log(storeUsers.getItem());
+// class DataStore<T>{
+//   private data: T[] = []
+//   addItem(item: T): void{
+//     this.data.push(item)
+//   }
+//   getItem(): T[]{
+//     return this.data
+//   }
+// }
+// interface IPerson {
+//   name: string
+// }
+// const storeUsers = new DataStore<IPerson>()
+// storeUsers.addItem({name: 'turbo'})
+// storeUsers.addItem({name: 'turbo2'})
+// console.log(storeUsers.getItem());
 
-const ageStore = new DataStore<number>();
-ageStore.addItem(10)
-ageStore.addItem(11)
-console.log(ageStore.getItem());
+// const ageStore = new DataStore<number>();
+// ageStore.addItem(10)
+// ageStore.addItem(11)
+// console.log(ageStore.getItem());
 
 
 
-interface IUser {
-  name: string;
-  age: number;
-}
-function createPerson(name: string): IUser {
-  const person: Partial<IUser> = {name};
-  person.age = 21;
-  return person as IUser
-}
+// interface IUser {
+//   name: string;
+//   age: number;
+// }
+// function createPerson(name: string): IUser {
+//   const person: Partial<IUser> = {name};
+//   person.age = 21;
+//   return person as IUser
+// }
 
 
 
@@ -666,16 +666,16 @@ function createPerson(name: string): IUser {
 
 
 
-interface IPage {
-  title: string;
-  annotation: string;
-  pageNumber: number;
-}
-const pageAnnotation: Pick<IPage, 'annotation' | 'pageNumber'> = {
-  annotation: 'small page',
-  pageNumber: 22
-}
-console.log(pageAnnotation);
+// interface IPage {
+//   title: string;
+//   annotation: string;
+//   pageNumber: number;
+// }
+// const pageAnnotation: Pick<IPage, 'annotation' | 'pageNumber'> = {
+//   annotation: 'small page',
+//   pageNumber: 22
+// }
+// console.log(pageAnnotation);
 
 
 /*
@@ -684,60 +684,88 @@ console.log(pageAnnotation);
   |==============================
 */
 
-function getPromise(): Promise<Array<string | number>> {
-  return new Promise((resolve) => {
-    resolve(["Text", 50]);
-  });
+// function getPromise(): Promise<Array<string | number>> {
+//   return new Promise((resolve) => {
+//     resolve(["Text", 50]);
+//   });
+// }
+
+// getPromise().then((data) => {
+//   console.log(data);
+// });
+
+// type AllType = {
+//   name: string;
+//   position: number;
+//   color: string;
+//   weight: number;
+// };
+
+// function compare(
+//   top: Pick<AllType, "name" | "color">,
+//   bottom: Pick<AllType, "position" | "weight">
+// ): AllType {
+//   return {
+//     name: top.name,
+//     color: top.color,
+//     position: bottom.position,
+//     weight: bottom.weight,
+//   };
+// }
+
+
+// function merge<T extends object, U extends object >(objA: T, objB: U) {
+//   return Object.assign(objA, objB);
+// }
+
+// const merged = merge({ auto: 'Renault' }, { model: 'Megane' })
+// console.log(merged);
+
+
+
+// class Component<T> {
+//   constructor (public props:T) {
+
+//   }
+// }
+
+// interface IProps {
+//   title: string,
+// }
+
+// class Page extends Component<IProps>{
+//   pageInfo () {
+//     console.log(this.props.title);
+//   }
+// }
+
+// const newPage = new Page({ title: 'Cat' });
+// newPage.pageInfo()
+
+
+/*
+  |==============================
+  | Lesson 6 Practice
+  |==============================
+*/
+
+function Logger(logString: string) {
+  return function(constructor: Function) {
+  console.log(logString);
+  console.log(constructor);
 }
-
-getPromise().then((data) => {
-  console.log(data);
-});
-
-type AllType = {
-  name: string;
-  position: number;
-  color: string;
-  weight: number;
-};
-
-function compare(
-  top: Pick<AllType, "name" | "color">,
-  bottom: Pick<AllType, "position" | "weight">
-): AllType {
-  return {
-    name: top.name,
-    color: top.color,
-    position: bottom.position,
-    weight: bottom.weight,
-  };
 }
-
-
-function merge<T extends object, U extends object >(objA: T, objB: U) {
-  return Object.assign(objA, objB);
+function AddProperty() {
+  return function (constructor: Function) {
+    console.log('AddProperty');
+    constructor.prototype.modify = true;
 }
-
-const merged = merge({ auto: 'Renault' }, { model: 'Megane' })
-console.log(merged);
-
-
-
-class Component<T> {
-  constructor (public props:T) {
-
-  }
 }
-
-interface IProps {
-  title: string,
+@Logger('LOGGING-CONTROLLER')
+@AddProperty()
+class Controller{
+  public id = 1;
+  public modify = false; 
 }
-
-class Page extends Component<IProps>{
-  pageInfo () {
-    console.log(this.props.title);
-  }
-}
-
-const newPage = new Page({ title: 'Cat' });
-newPage.pageInfo()
+const controller = new Controller()
+console.log('Is modify?', controller.modify);
