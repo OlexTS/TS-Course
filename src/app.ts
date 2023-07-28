@@ -393,7 +393,6 @@
 // myHouse.comeIn(person);
 // myHouse.comeIn(person2);
 
-
 /*
   |==============================
   | Lesson 5 Practice
@@ -417,7 +416,6 @@
 // }
 // console.log(user);
 
-
 // interface Admin  {
 //   name: string,
 //   privileges: string[]
@@ -430,7 +428,6 @@
 
 // interface AdminUser extends Admin, User{ }
 
-
 // type ComplexType = string | number
 // function combine(a: ComplexType, b: ComplexType) {
 //   if (typeof a === 'string' || typeof b === 'string') {
@@ -439,10 +436,9 @@
 //   return a+b
 // }
 
-
-interface Admin  {
-  name: string,
-  privileges: string[]
+interface Admin {
+  name: string;
+  privileges: string[];
 }
 
 // interface User {
@@ -459,9 +455,8 @@ interface Admin  {
 //     console.log(el.privileges);
 //   }
 //   console.log(el.name);
-  
-// }
 
+// }
 
 // abstract class Guy {
 //   constructor(public name: string){}
@@ -490,15 +485,12 @@ interface Admin  {
 //   }
 // }
 
-
 // const input = document.getElementById('num1')
 // if (input){
 //   (input as HTMLInputElement).value
 //   const newValue = input as HTMLInputElement;
 //   newValue.value
 // }
-
-
 
 // interface IPerson {
 //   name: string;
@@ -511,9 +503,8 @@ interface Admin  {
 //   age: 35,
 //   gender: 'Man',
 //   country: 'United States',
-  
-// }
 
+// }
 
 // interface IPerson {
 //   name: string;
@@ -528,12 +519,9 @@ interface Admin  {
 
 // user?.additionInfo?.someInfo
 
-
-
 // const userInput = null;
 // const store = userInput ?? 'DEFAULT'
 // console.log(store);
-
 
 // function add(a: string, b: string): string;
 // function add(a: number, b: number): number;
@@ -544,13 +532,12 @@ interface Admin  {
 //   return a + b;
 // }
 
-
 // let arr: (string | number)[];
 // arr = ['arr', 1];
 // const promise: Promise<string> = new Promise((resolve) => {
 //   resolve('string')
 // });
- 
+
 // promise.then((data) => {
 //   console.log(data);
 //   });
@@ -561,7 +548,7 @@ interface Admin  {
 //   }
 //   promiseFoo().then((data) => {
 //       console.log(data);
-      
+
 //   })
 // })();
 
@@ -583,7 +570,6 @@ interface Admin  {
 // const mergeed = merge<Person, additionFields>(toMerge1, toMerge2);
 // mergeed.name
 
-
 // function mergee<T extends object, U extends object>(objA: T, objB: U){
 //   return Object.assign({}, objA, objB);
 // }
@@ -596,7 +582,6 @@ interface Admin  {
 // const mergeed = merge(toMerge1, toMerge2);
 // mergeed.name
 
-
 // interface ILength {
 //   length: number
 // }
@@ -608,12 +593,10 @@ interface Admin  {
 // }
 // console.log(getLength(obj));
 
-
 // function extractValue<T extends object, U extends keyof T>(obj: T, key: U) {
 //   return obj[key]
 // }
 // const field = extractValue({ name: 'Bob' }, 'name')
-
 
 // class DataStore<T>{
 //   private data: T[] = []
@@ -637,8 +620,6 @@ interface Admin  {
 // ageStore.addItem(11)
 // console.log(ageStore.getItem());
 
-
-
 // interface IUser {
 //   name: string;
 //   age: number;
@@ -648,8 +629,6 @@ interface Admin  {
 //   person.age = 21;
 //   return person as IUser
 // }
-
-
 
 // const arr1: Readonly<string[]> = ['one', 'two', 'three']
 // arr1.push('four')
@@ -664,8 +643,6 @@ interface Admin  {
 // }
 // obj1.name = 'Osaka1'
 
-
-
 // interface IPage {
 //   title: string;
 //   annotation: string;
@@ -676,7 +653,6 @@ interface Admin  {
 //   pageNumber: 22
 // }
 // console.log(pageAnnotation);
-
 
 /*
   |==============================
@@ -713,15 +689,12 @@ interface Admin  {
 //   };
 // }
 
-
 // function merge<T extends object, U extends object >(objA: T, objB: U) {
 //   return Object.assign(objA, objB);
 // }
 
 // const merged = merge({ auto: 'Renault' }, { model: 'Megane' })
 // console.log(merged);
-
-
 
 // class Component<T> {
 //   constructor (public props:T) {
@@ -741,7 +714,6 @@ interface Admin  {
 
 // const newPage = new Page({ title: 'Cat' });
 // newPage.pageInfo()
-
 
 /*
   |==============================
@@ -770,8 +742,6 @@ interface Admin  {
 // const controller = new Controller()
 // console.log('Is modify?', controller.modify);
 
-
-
 // interface IDecoration {
 //   parent: string;
 //   template: string;
@@ -796,34 +766,100 @@ interface Admin  {
 //   public content = 'My controller'
 // }
 
-interface IDecoration {
-  parent: string;
-  template: string;
-}
+// interface IDecoration {
+//   parent: string;
+//   template: string;
+// }
 
-function ControllerDecoration(config: IDecoration) {
-  return function <T extends { new(...arg: any[]): { content: string } }>(originalConstructor: T) {
-    return class extends originalConstructor {
-      private element: HTMLElement;
-      private parent: HTMLElement;
-      constructor(...args: any[]) {
-        super(...args);
-        this.parent = document.getElementById(config.parent)!;
-        this.element = document.createElement(config.template);
-        this.element.innerHTML = this.content;
-        this.parent.appendChild(this.element)
+// function ControllerDecoration(config: IDecoration) {
+//   return function <T extends { new (...arg: any[]): { content: string } }>(
+//     originalConstructor: T
+//   ) {
+//     return class extends originalConstructor {
+//       private element: HTMLElement;
+//       private parent: HTMLElement;
+//       constructor(...args: any[]) {
+//         super(...args);
+//         this.parent = document.getElementById(config.parent)!;
+//         this.element = document.createElement(config.template);
+//         this.element.innerHTML = this.content;
+//         this.parent.appendChild(this.element);
+//       }
+//     };
+//   };
+// }
+// @ControllerDecoration({
+//   parent: "app",
+//   template: "H1",
+// })
+// class Controller {
+//   public content = "My controller";
+// }
+// const controller1 = new Controller();
+// const controller2 = new Controller();
+// const controller3 = new Controller();
+
+// function ShowParams(
+//   target: any,
+//   name: string,
+//   description: PropertyDescriptor
+// ) {
+//   console.log("target", target);
+//   console.log("name", name);
+//   console.log("descriptor", description);
+// }
+
+// function AutoBind(_: any, _2: any, descriptor: PropertyDescriptor) {
+//   const method = descriptor.value as Function;
+
+//   return {
+//     configurable: true,
+//     enumerable: false,
+//     get() {
+//       return method.bind(this)
+//     }
+//   };
+// }
+
+// class Notifier {
+//   public content = "Message in class";
+
+//   @ShowParams
+//   @AutoBind
+//   showMessage() {
+//     console.log(this.content);
+//   }
+// }
+
+// const notifier = new Notifier();
+// const showMessage = notifier.showMessage;
+// notifier.showMessage();
+// showMessage();
+
+
+function AddTax(taxPercent: number) {
+  return function (_: any, _2: any, descriptor: PropertyDescriptor) {
+  const method = descriptor.value as Function;
+
+  return {
+    configurable: true,
+    enumerable: false,
+    get() {
+      return (...args: any[]) => {
+        const result = method.apply(this, args);
+        return result + (result/100*taxPercent)
       }
     }
+  };
 }
-}
-@ControllerDecoration({
-  parent: 'app',
-  template: 'H1'
-})
-class Controller {
-  public content = 'My controller'
 }
 
-const controller1 = new Controller()
-const controller2 = new Controller()
-const controller3 = new Controller()
+class Payment {
+  @AddTax(20)
+  pay(money: number) {
+    return money;
+  }
+}
+
+const payment = new Payment();
+console.log(payment.pay(100));
