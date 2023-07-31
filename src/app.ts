@@ -837,29 +837,136 @@ interface Admin {
 // showMessage();
 
 
-function AddTax(taxPercent: number) {
-  return function (_: any, _2: any, descriptor: PropertyDescriptor) {
-  const method = descriptor.value as Function;
+// function AddTax(taxPercent: number) {
+//   return function (_: any, _2: any, descriptor: PropertyDescriptor) {
+//   const method = descriptor.value as Function;
 
-  return {
-    configurable: true,
-    enumerable: false,
-    get() {
-      return (...args: any[]) => {
-        const result = method.apply(this, args);
-        return result + (result/100*taxPercent)
+//   return {
+//     configurable: true,
+//     enumerable: false,
+//     get() {
+//       return (...args: any[]) => {
+//         const result = method.apply(this, args);
+//         return result + (result/100*taxPercent)
+//       }
+//     }
+//   };
+// }
+// }
+// class Payment {
+//   @AddTax(20)
+//   pay(money: number) {
+//     return money;
+//   }
+// }
+// const payment = new Payment();
+// console.log(payment.pay(100));
+
+
+// function checkEmail(target: any, nameMethod: string, position: number) {
+//   if (!target[nameMethod].validation) {
+//     target[nameMethod].validation = {}
+//   }
+//   Object.assign(target[nameMethod].validation, {
+//     [position]: (value: string) => {
+//       if (value.includes('@')) {
+//         return value
+//       }
+//       throw new Error('Not valid email')
+//     }
+//   })
+// }
+// function Validation(_:any, _2: string, descriptor: PropertyDescriptor): PropertyDescriptor {
+//   const method = descriptor.value;
+//   return {
+//     configurable: true,
+//     enumerable: false,
+//     get() {
+//       return (...args: any[]) => {
+//         if (method.validation) {
+//           args.forEach((item, index) => {
+//             if (method.validation[index]) {
+//               args[index]=method.validation[index](item)
+//             }
+//           })
+//         }
+//         return method.apply(this, args)
+//       }
+//     }
+//   }
+// }
+// class Person {
+//   @Validation
+//   setEmail(@checkEmail email: string) {
+//     console.log(email);
+    
+//   }
+// }
+// const person = new Person();
+// person.setEmail('ts@gmail.com');
+
+
+interface IValidationConfig{
+  [prop: string]: {
+    [validationProp: string]: string[];
+
+  }
+}
+const registeredValidator: IValidationConfig = {}; 
+
+function Required(target: any, propName: string) {
+  registeredValidator[target.constructor.name] = {
+    ...registeredValidator[target.constructor.name],
+    [propName]: ['required']
+  }
+  
+}
+function PositiveNumber(target: any, propName: string) {
+  registeredValidator[target.constructor.name] = {
+    ...registeredValidator[target.constructor.name],
+    [propName]: ['positive']
+  }
+  
+}
+
+function validation(obj: any) {
+  const objectValidation = registeredValidator[obj.constructor.name];
+  if (!objectValidation) {
+    return true
+  }
+  let isValid = true;
+  for (const prop in objectValidation) {
+    for (const validProp of objectValidation[prop]) {
+      switch (validProp) {
+        case 'required':
+          isValid = isValid && !!obj[prop];
+          break;
+        case 'positive':
+          isValid = isValid && obj[prop]>0;
+          break;
       }
     }
-  };
-}
+  }
+  return isValid;
 }
 
-class Payment {
-  @AddTax(20)
-  pay(money: number) {
-    return money;
+class Person {
+  @Required
+  public name: string
+  @PositiveNumber
+  public age: number
+  constructor(n: string, a: number) {
+    this.name = n;
+    this.age = a;
   }
 }
 
-const payment = new Payment();
-console.log(payment.pay(100));
+const person = new Person('Max', -32);
+if (!validation(person)) {
+  console.log('Not valid');
+  
+}
+else {
+  console.log('Valid');
+  
+}
